@@ -1,0 +1,103 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "广告页",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "发现",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}, {
+			"path": "pages/vedio/index",
+			"style": {
+				"navigationBarTitleText": "视频",
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/mine/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"app-plus": {
+					"titleNView": false
+				}
+
+			}
+
+		},
+		{
+			"path": "pages/cloud/index",
+			"style": {
+				"navigationBarTitleText": "云村",
+				"app-plus": {
+					"titleNView": false
+				}
+
+			}
+
+		},
+		{
+			"path": "pages/account/index",
+			"style": {
+				"navigationBarTitleText": "账号",
+				"app-plus": {
+					"titleNView": false
+				}
+
+			}
+
+		}
+	],
+	"tabBar": {
+		"color": "#888",
+		"selectedColor": "#ff2419",
+		"borderStyle": "white",
+		"backgroundColor": "#f9f9f9",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/tab/t_1.png",
+			"selectedIconPath": "static/tab/t_11.png",
+			"text": "发现"
+		}, {
+			"pagePath": "pages/vedio/index",
+			"iconPath": "static/tab/t_2.png",
+			"selectedIconPath": "static/tab/t_21.png",
+			"text": "视频"
+		}, {
+			"pagePath": "pages/mine/index",
+			"iconPath": "static/tab/t_3.png",
+			"selectedIconPath": "static/tab/t_31.png",
+			"text": "我的"
+		}, {
+			"pagePath": "pages/cloud/index",
+			"iconPath": "static/tab/t_4.png",
+			"selectedIconPath": "static/tab/t_41.png",
+			"text": "云村"
+		}, {
+			"pagePath": "pages/account/index",
+			"iconPath": "static/tab/t_5.png",
+			"selectedIconPath": "static/tab/t_51.png",
+			"text": "账号"
+		}]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "Uniapp Music",
+		"navigationBarBackgroundColor":"#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom"
+	},
+	"uniIdRouter": {}
+}
