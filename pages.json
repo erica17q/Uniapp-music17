@@ -22,7 +22,10 @@
 			"style": {
 				"navigationBarTitleText": "视频",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					// 引用插件mescrol, 进行配置，避免多端差异
+					"bounce": "none", //取消ios回弹, 避免和下拉刷新冲突
+					"disableScroll":true //Android小程序卡顿
 				}
 			}
 		},
@@ -31,7 +34,7 @@
 			"style": {
 				"navigationBarTitleText": "我的",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": true
 				}
 
 			}
@@ -44,9 +47,7 @@
 				"app-plus": {
 					"titleNView": false
 				}
-
 			}
-
 		},
 		{
 			"path": "pages/account/index",

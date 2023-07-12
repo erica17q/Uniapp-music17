@@ -26,7 +26,7 @@
 		<view>
 			<songList title="推荐歌单" link="test?id=123" :list="recommendSongs"></songList>
 		</view>
-		<!-- 歌单分类块 -->
+		<!-- 歌单 -->
 		<view class="song-list">
 			<view class="tit-bar">
 				推荐歌单
@@ -41,7 +41,7 @@
 				</navigator>
 			</scroll-view>
 		</view>
-		<!-- 歌单分类块 -->
+		<!-- 新歌新碟 -->
 		<view class="song-list">
 			<view class="switch-line flex-box">
 				<view class="flex-box">
@@ -64,13 +64,24 @@
 				</view>
 			</scroll-view>
 		</view>
+		<!-- 精选视频 -->
+		<view class="video-list song-list">
+			<view class="tit-bar">
+				精选视频
+				<view class="more fr">更多</view>
+			</view>
+			<view class="video-item" v-for="(item, index) in relatedVideo" :key="index">
+				<image class="img" :src="item.cover + $imgSuffix"></image>
+				<view class="desc ellipsis">{{ item.name}}</view>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
-	import {
-		apiGetBanner
-	} from '@/apis/index.js'
+	// import {
+	// 	apiGetBanner
+	// } from '@/apis/index.js'
 	import songList from '../../components/songList.vue'
 	export default {
 		components: {
@@ -98,6 +109,7 @@
 				newType: 1, // 新歌新碟
 				latestTempAlbum: [],
 				latestAlbum: [],
+				relatedVideo: [],
 
 			}
 		},
@@ -106,7 +118,7 @@
 			this.curDate = new Date().getDate()
 			this.getRecommendSongs()
 			this.getLatestAlbum()
-
+			this.getRelatedVideo()
 
 		},
 		methods: {
@@ -181,6 +193,20 @@
 						console.log(this.latestTempAlbum);
 						this.latestAlbum = res.data.albums.slice(0, 3);
 						console.log(this.latestAlbum);
+					}
+				})
+			},
+
+			//  获取相关视频  原接口有问题，这是新接口
+			getRelatedVideo() {
+				uni.request({
+					url: 'https://www.gzamon.wang/api/top/mv?limit=3',
+					method: 'GET',
+					data: {},
+					success: (res) => {
+						console.log(res.data);
+						this.relatedVideo = res.data.data;
+						console.log(this.relatedVideo);
 					}
 				})
 			}
@@ -366,7 +392,38 @@
 			transform: scale(0.8);
 		}
 	}
+	.video-list {
+		padding-left: 0;
 	
+		.tit-bar {
+			padding-left: 32rpx;
+		}
+	
+		.video-item {
+			width: 686rpx;
+			height: 490rpx;
+			margin: 0 auto;
+			background: #f8f8f8;
+			border-radius: 10rpx;
+			overflow: hidden;
+			margin-bottom: 24rpx;
+		}
+	
+		.img {
+			display: block;
+			width: 686rpx;
+			height: 390rpx;
+			background: #eee;
+		}
+	
+		.desc {
+			padding-left: 40rpx;
+			font-size: 30rpx;
+			font-weight: 600;
+			line-height: 100rpx;
+		}
+	}
+
 	/*
 	 *平台差异化处理的代码可以放在底部，这样有利于集中管理
 	*/
@@ -374,6 +431,6 @@
 	.banner {
 		margin-top: 60rpx;
 	}
-	
+
 	/* #endif */
 </style>
