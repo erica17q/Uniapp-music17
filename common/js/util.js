@@ -15,17 +15,67 @@ const PubFuc = {
 		}
 		String.prototype.ToString = function(value) {
 			var date = new Date(parseInt(this.substring(6, this.length - 2)));
-			value = value.replace("yyyy",date.getFullYear());
-			value = value.replace("yy",t(date.getFullYear().toString().substr(2)));
-			value = value.replace("MM",t(date.getMonth()));
-			value = value.replace("dd",t(date.getDate()));
-			value = value.replace("hh",t(date.getHours()));
-			value = value.replace("mm",t(date.getMinutes()));
-			value = value.replace("ss",t(date.getSeconds()));
-			value = value.replace("ms",date.getMilliseconds());
+			value = value.replace("yyyy", date.getFullYear());
+			value = value.replace("yy", t(date.getFullYear().toString().substr(2)));
+			value = value.replace("MM", t(date.getMonth()));
+			value = value.replace("dd", t(date.getDate()));
+			value = value.replace("hh", t(date.getHours()));
+			value = value.replace("mm", t(date.getMinutes()));
+			value = value.replace("ss", t(date.getSeconds()));
+			value = value.replace("ms", date.getMilliseconds());
 			return value;
 		}
 		return value.ToString("yyyy-MM-dd hh:mm:ss")
+	},
+
+	// 设置角标
+	setTabBarBadge(page) {
+		// 设置 store 红点信息
+		const accountMsg = store.state.message.account || 6
+		const newMsg = store.state.message.newMsg || []
+		// 设置newZMsg数组的索引3的位置为0，数组长度是4，第四个元素的值为0，其余元素值为undifined
+		newMsg[page] = 0
+
+		const TempMsg = {
+			account: page == 4 ? 0 : accountMsg,
+			newMsg
+		}
+
+		store.commit('storeMessage', TempMsg)
+
+		// 获取 store 红点信息
+		const accountMsgNew = store.state.message.sccount
+		const newMsgNew = store.state.message.newMsg || []
+
+		if (accountMsgNew > 0) { //如果有账号信息
+			setTimeout(() => {
+				// uni.setTabBarBadge 这个API 在非tabbar 页面上调用会失效
+				uni.setTabBarBadge({
+					inex: 4,
+					text: String(accountMsgNew)
+				})
+			})
+
+		} else {
+			setTimeout(() => {
+				// 删除角标
+				uni.removeTabBarBadge({
+					index: 0,
+				})
+			})
+		}
+
+		newMsgNew.forEach((item, index) => { // 设置红点
+			if (item > 0) {
+				uni.showTabBarRedDot({
+					index
+				})
+			} else {
+				uni.hideTabBarRedDot({
+					index
+				})
+			}
+		})
 	}
 }
 
